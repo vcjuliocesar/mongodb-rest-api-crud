@@ -15,6 +15,7 @@ class MonngoServices
     private $conn;
     private $database;
     private $fields;
+    private $schema;
 
 
     public function __construct()

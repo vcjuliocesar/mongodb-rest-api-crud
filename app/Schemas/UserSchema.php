@@ -9,7 +9,7 @@ class UserSchema extends MonngoServices
 
     public function up()
     {
-        $schema = ['validator' => [
+        $schemaValidator = ['validator' => [
             '$jsonSchema' => [
                 'bsonType' => 'object',
                 'title' => 'Users',
@@ -40,7 +40,7 @@ class UserSchema extends MonngoServices
 
         $this->setCollectionName('Users');
 
-        $this->setFields($schema);
+        $this->setFields($schemaValidator);
 
         $this->forge();
     }
