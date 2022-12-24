@@ -52,7 +52,7 @@ class MongoDB
 
     /**
      * @desc connecting to Mongodb
-     * @return void - return connection
+     * @return object - mogodb connection
      */
     public function getConn()
     {
