@@ -3,6 +3,7 @@
 namespace App\Mongo;
 
 use App\Schemas\UserSchema;
+use App\Schemas\ClientSchema;
 use Exception;
 
 class Dispatcher
@@ -13,6 +14,7 @@ class Dispatcher
     {
         $this->migrations = [
             'users' => (new UserSchema)->up(),
+            'clients' => (new ClientSchema)->up(),
         ];
 
         return $this->migrations;

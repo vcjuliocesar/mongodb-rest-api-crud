@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 use MongoDB\Client;
+use MongoDB\Database;
 
 class MongoDB
 {
@@ -49,23 +50,93 @@ class MongoDB
         }
     }
 
+    /**
+     * @desc connecting to Mongodb
+     * @return void - return connection
+     */
     public function getConn()
     {
         return $this->conn;
     }
 
+    /**
+     * @desc delete database
+     * @return array|object - Command result document
+     */
     public function tearDown()
     {
         return (new Client(sprintf('mongodb://%s', $this->cdn)))->dropDatabase($this->name);
     }
 
-    public function manager()
+    /**
+     * @desc return database name
+     * @return string - database name
+     */
+    public function getDatabase()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @desc create a collection with jsonschema validation
+     * @param string - $collectionName - this is the name of the collection
+     * @param array - this the schema validation
+     * @return array|object - Command result document
+     */
+    public function CreateCollection(string $collectionName, array $schema)
+    {
+        return $this->conn->createCollection($collectionName, $schema);
+    }
+
+    /**
+     * @desc modify a collection with jsonschema validation
+     * @param string - $collectionName - this is the name of the collection
+     * @param array - this the schema validation
+     * @return array|object - Command result document
+     */
+    public function ModifyCollection(string $collectionName, array $schema)
+    {
+        return $this->database()->modifyCollection($collectionName, $schema);
+    }
+
+    /**
+     * @desc return manager
+     * @return 
+     */
+    private function manager()
     {
         return (new Client(sprintf('mongodb://%s', $this->cdn)))->getManager();
     }
 
-    public function getDatabase()
+    /**
+     * @desc return manager
+     * @return
+     */
+    private function database()
     {
-        return $this->name;
+        return new Database($this->manager(), $this->name);
+    }
+
+    /**
+     * @desc validate if collection exists
+     * @param string name - collection name
+     * @return bool - true or false
+     */
+    public function collectionExists(string $name): bool
+    {
+        try {
+            $flag = false;
+            $collections = [];
+            foreach ($this->database()->listCollectionNames() as $collectionName) {
+                $collections[] = $collectionName;
+            }
+
+            if (in_array($name, $collections)) {
+                $flag = true;
+            }
+            return $flag;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
     }
 }

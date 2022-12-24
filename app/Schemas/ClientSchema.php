@@ -4,7 +4,7 @@ namespace App\Schemas;
 
 use App\Mongo\MonngoServices;
 
-class UserSchema extends MonngoServices
+class ClientSchema extends MonngoServices
 {
 
     public function up()
@@ -12,7 +12,7 @@ class UserSchema extends MonngoServices
         $schemaValidator = ['validator' => [
             '$jsonSchema' => [
                 'bsonType' => 'object',
-                'title' => 'Users',
+                'title' => 'Clients',
                 'properties' => [
                     'name' => [
                         'bsonType' => 'string',
@@ -22,9 +22,9 @@ class UserSchema extends MonngoServices
                         'bsonType' => 'string',
                         'description' => "'email' must be a string and is required"
                     ],
-                    'password' => [
-                        'bsonType' => 'string',
-                        'description' => "'password' must be a string and is required"
+                    'retainer_fee' => [
+                        'bsonType' => 'int',
+                        'description' => "'retainer_fee' must be a int and is required"
                     ],
                     'updated_at' => [
                         'bsonType' => 'date'
@@ -34,12 +34,12 @@ class UserSchema extends MonngoServices
                     ]
 
                 ],
-                'required' => ['name', 'email', 'password'],
+                'required' => ['name', 'email', 'retainer_fee'],
             ]
         ]];
 
 
-        $this->jsonSchema("Users", $schemaValidator);
+        $this->jsonSchema("Clients", $schemaValidator);
 
         return $this;
     }
