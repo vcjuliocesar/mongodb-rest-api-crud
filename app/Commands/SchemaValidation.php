@@ -8,7 +8,7 @@ use App\Mongo\Dispatcher;
 //use App\Schemas\User;
 
 
-class ValidationSchema extends BaseCommand
+class SchemaValidation extends BaseCommand
 {
     protected $group       = 'mongodb';
     protected $name        = 'app:schemas';
