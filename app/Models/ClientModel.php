@@ -5,7 +5,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 use App\Libraries\MongoDB;
 
-class UserModel
+class ClientModel
 {
     private $db;
     private $conn;
@@ -15,7 +15,7 @@ class UserModel
     {
         $this->db = new MongoDB();
         $this->conn = $this->db->getConn();
-        $this->collection = $this->conn->Users;
+        $this->collection = $this->conn->Clients;
     }
 
     public function all()
