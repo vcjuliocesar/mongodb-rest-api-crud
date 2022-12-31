@@ -1,10 +1,10 @@
 <?php
 
 namespace Tests\Support\Database\Seeds;
+use App\Mongo\MongoSeeder;
+//use CodeIgniter\Database\Seeder;
 
-use CodeIgniter\Database\Seeder;
-
-class ExampleSeeder extends Seeder
+class ExampleSeeder extends MongoSeeder
 {
     public function run()
     {
@@ -32,10 +32,10 @@ class ExampleSeeder extends Seeder
             ],
         ];
 
-        $builder = $this->db->table('factories');
+        $builder = $this->db->factories;
 
         foreach ($factories as $factory) {
-            $builder->insert($factory);
+            $builder->insertOne($factory);
         }
     }
 }

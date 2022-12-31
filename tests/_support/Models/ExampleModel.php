@@ -1,24 +1,27 @@
 <?php
 
 namespace Tests\Support\Models;
+use App\Libraries\MongoDB;
 
-use CodeIgniter\Model;
-
-class ExampleModel extends Model
+class ExampleModel
 {
-    protected $table          = 'factories';
-    protected $primaryKey     = 'id';
-    protected $returnType     = 'object';
-    protected $useSoftDeletes = false;
-    protected $allowedFields  = [
-        'name',
-        'uid',
-        'class',
-        'icon',
-        'summary',
-    ];
-    protected $useTimestamps      = true;
-    protected $validationRules    = [];
-    protected $validationMessages = [];
-    protected $skipValidation     = false;
+    protected $collection;
+    protected $db;
+
+    public function __construct()
+    {
+        $connection = new MongoDB();
+        $this->db = $connection->getConn();
+        $this->collection = $this->db->factories;
+    }
+
+    public function getCollection()
+    {
+        return $this->collection;
+    }
+
+    public function deleteCollection()
+    {
+        return $this->db->dropCollection('factories');
+    }
 }
