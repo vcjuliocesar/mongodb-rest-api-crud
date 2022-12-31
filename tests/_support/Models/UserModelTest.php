@@ -47,6 +47,26 @@ class UserModelTest extends CIUnitTestCase
         $this->assertFalse($result);
     }
 
+    public function testUserSchemaValidationAdditionalPropertiesFail()
+    {
+        $model = model("UserModel");
+
+        $faker = Factory::create();
+
+        $data = [
+            "name" => $faker->name(),
+            "email" => $faker->email(),
+            "password" => $faker->password(),
+            "additionalProperti" => "hola"
+        ];
+
+        $this->expectException(\RuntimeException::class);
+
+        $result = $model->store($data);
+
+        $this->assertFalse($result);
+    }
+
     public function testUserEntity()
     {
         $faker = Factory::create();
@@ -60,10 +80,5 @@ class UserModelTest extends CIUnitTestCase
         $result = $model->store($user->getAttributes());
 
         $this->assertTrue($result);
-
-        // $user = $model->findBy(["email" => $data['email']]);
-        // $model->destroy(["_id" => new \MongoDB\BSON\ObjectId($user->_id)]);
-
-        // $this->assertNull($model->findBy(['_id' => new \MongoDB\BSON\ObjectId($user->_id)]));
     }
 }

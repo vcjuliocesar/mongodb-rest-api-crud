@@ -14,6 +14,9 @@ class ClientSchema extends MonngoServices
                 'bsonType' => 'object',
                 'title' => 'Clients',
                 'properties' => [
+                    '_id'=>[
+                        'bsonType' => 'objectId'
+                    ],
                     'name' => [
                         'bsonType' => 'string',
                         'description' => "'name' must be a string and is required"
@@ -35,6 +38,7 @@ class ClientSchema extends MonngoServices
 
                 ],
                 'required' => ['name', 'email', 'retainer_fee'],
+                "additionalProperties" => false
             ]
         ]];
 

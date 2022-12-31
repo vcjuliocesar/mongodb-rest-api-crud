@@ -14,6 +14,9 @@ class UserSchema extends MonngoServices
                 'bsonType' => 'object',
                 'title' => 'Users',
                 'properties' => [
+                    '_id'=>[
+                        'bsonType' => 'objectId'
+                    ],
                     'name' => [
                         'bsonType' => 'string',
                         'description' => "'name' must be a string and is required"
@@ -35,6 +38,7 @@ class UserSchema extends MonngoServices
 
                 ],
                 'required' => ['name', 'email', 'password'],
+                "additionalProperties" => false
             ]
         ]];
 
