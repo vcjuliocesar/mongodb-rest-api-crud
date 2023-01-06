@@ -37,6 +37,10 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->post('register','AuthController::register');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
