@@ -11,6 +11,11 @@ class User extends Entity
         $this->attributes['password'] = password_hash($password, PASSWORD_BCRYPT);
     }
 
+    protected function setConfirmPassword(string $password)
+    {
+        unset($this->attributes['confirm-password']);
+    }
+
     public function getAttributes()
     {
         return $this->attributes;
