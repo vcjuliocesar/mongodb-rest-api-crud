@@ -94,3 +94,4 @@ class UserModelTest extends CIUnitTestCase
         $this->assertNull($model->findBy(['_id' => new \MongoDB\BSON\ObjectId($user->_id)]));
     }
 }
+

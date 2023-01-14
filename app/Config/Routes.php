@@ -39,7 +39,7 @@ $routes->get('/', 'Home::index');
 
 $routes->group('auth', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('register','AuthController::register');
-});
+}); 
 
 /*
  * --------------------------------------------------------------------

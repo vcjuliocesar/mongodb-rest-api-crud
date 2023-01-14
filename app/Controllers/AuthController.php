@@ -52,7 +52,7 @@ class AuthController extends BaseController
                     ResponseInterface::HTTP_BAD_REQUEST
                 );
             }
-
+            
             $user = new User($input->getPost());
             $model = model('UserModel');
             $model->store($user->getAttributes());

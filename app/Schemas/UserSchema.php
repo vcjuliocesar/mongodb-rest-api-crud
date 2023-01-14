@@ -46,7 +46,6 @@ class UserSchema extends MonngoServices
             ]
         ]];
 
-
         $this->jsonSchema("Users", $schemaValidator);
 
         return $this;
