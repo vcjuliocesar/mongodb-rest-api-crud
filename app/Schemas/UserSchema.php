@@ -29,6 +29,10 @@ class UserSchema extends MonngoServices
                         'bsonType' => 'string',
                         'description' => "'password' must be a string and is required"
                     ],
+                    'confirm-password' => [
+                        'bsonType' => 'string',
+                        'description' => "'confirm-password' must be a string and is required"
+                    ],
                     'updated_at' => [
                         'bsonType' => 'date'
                     ],
@@ -41,7 +45,6 @@ class UserSchema extends MonngoServices
                 "additionalProperties" => false
             ]
         ]];
-
 
         $this->jsonSchema("Users", $schemaValidator);
 
