@@ -49,4 +49,37 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+    public function getResponse(array $responseBody,int $code = ResponseInterface::HTTP_OK)
+    {
+        return $this->response->setStatusCode($code)->setJSON($responseBody);
+    }
+
+    /**
+     * Checks fields in a request to get its content
+     * @param IncomingRequest::class
+     */
+    public function getRequestInput(IncomingRequest $request)
+    {
+        $input = $request->getPost();
+
+        if (empty($input)) {
+            $input = json_decode($request->getBody(), true);
+            return $input;
+        }
+        
+        return $request;
+    }
+
+    /**
+     * Run validation services
+     * @param $input 
+     * @param array $rules
+     */
+    public function validateRequest($input, array $rules)
+    {
+        $this->validator = service('validation')->reset()->setRules($rules);
+
+        return $this->validator->withRequest($input)->run();
+    }
 }
